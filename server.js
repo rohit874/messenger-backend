@@ -25,7 +25,7 @@ mongoose.connect(DB_URL,{useNewUrlParser:true,useUnifiedTopology: true});
 const db = mongoose.connection;
 db.on('error', console.error.bind(console,'connection error'));
 db.once('open',()=>{
-    console.log("db connected");
+    // console.log("db connected");
 })
 
 //server
@@ -53,7 +53,7 @@ let users = [];
 
 io.on('connection', (socket) => {
     //when user connect
-    console.log(socket.id);
+    // console.log(socket.id);
     socket.emit('welcome', " hello from server socket io")
 
     //get userId and SocketId from user
@@ -65,7 +65,7 @@ io.on('connection', (socket) => {
     //Send and get message
 
     socket.on('sendMessage', ({senderId, receiverId, text})=>{
-        console.log(users);
+        // console.log(users);
         const user = getUser(receiverId);
         if (user) {
             io.to(user.SocketId).emit("getMessage", {
@@ -77,7 +77,7 @@ io.on('connection', (socket) => {
 
     //when user disconnect 
     socket.on('disconnect', ()=>{
-        console.log("user desconnected");
+        // console.log("user desconnected");
         removeUser(socket.id);
         io.emit('getUsers', users);
     })
