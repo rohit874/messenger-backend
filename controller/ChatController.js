@@ -35,7 +35,7 @@ const ChatController = {
             return data.members.find((m) => m !== req.params.userID);
         });
 
-        //find friend info
+        //getting friend info
         let friends=[];
         try{
             friends = await User.find({_id:{$in:friendsIds}}).select('-password -__v -createdAt -updatedAt');
